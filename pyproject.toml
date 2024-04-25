@@ -1,0 +1,45 @@
+[build-system]
+requires = ["hatchling", "hatch-vcs"]
+build-backend = "hatchling.build"
+
+[project]
+name = "pyenergi"
+authors = [{ name = "Kye Russell", email = "me@kye.id.au" }]
+description = "Python client for the myenergi API"
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.11"
+dependencies = ["typer", "rich", "httpx"]
+classifiers = [
+    "Development Status :: 1 - Planning",
+    "License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)",
+    "Natural Language :: English",
+    "Topic :: Software Development",
+]
+keywords = ["myenergi", "home automation", "iot", "internet of things"]
+dynamic = ["version"]
+
+[project.optional-dependencies]
+dev = ["ruff", "pre-commit", "mypy", "build", "hatch", "pytest", "pytest-cov"]
+docs = ["sphinx", "shibuya", "myst-parser"]
+
+[project.urls]
+Homepage = "https://pyenergi.readthedocs.io"
+Documentation = "https://pyenergi.readthedocs.io"
+Changelog = "https://pyenergi.readthedocs.io/en/latest/CHANGELOG.html"
+Repository = "https://github.com/KyeRussell/pyenergi"
+Issues = "https://github.com/KyeRussell/pyenergi/issues"
+
+[tool.hatch.version]
+source = "vcs"
+
+[tool.hatch.build.hooks.vcs]
+version-file = "src/__version__.py"
+
+[tool.hatch.build.targets.sdist]
+include = ["src/*", "LICENSE"]
+exclude = ["*.json", "pkg/_compat.py"]
+
+[tool.pytest.ini_options]
+minversion = "8.1.1"
+addopts = "--cov=src --cov-report html"
