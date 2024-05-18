@@ -23,6 +23,9 @@ jobs:
         run: uv pip install  -e . -r pyproject.toml --extra=dev build
       - name: Run tests
         run: pytest
+        env:
+          PYENERGI_HUB_SERIAL_NUMBER: ${{ secrets.LIVE_PYENERGI_HUB_SERIAL_NUMBER }}
+          PYENERGI_API_KEY: ${{ secrets.LIVE_PYENERGI_API_KEY }}
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v4.0.1
         with:
