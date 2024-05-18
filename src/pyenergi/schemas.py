@@ -71,8 +71,8 @@ class CTType(StrEnum):
     BATTERY = "AC Battery"
     MONITOR = "Monitor"
     GENERATION_AND_BATTERY = "Gen & Battery"
-    STORAGE = "Storage Only"
-    GENERATION = "Generation Only"
+    STORAGE = "Storage"
+    GENERATION = "Generation"
     GRID = "Grid"
 
 
@@ -142,6 +142,11 @@ class ZappiStatus(ApiObject):
     being_tampered_with: bool = Field(alias="beingTamperedWith")
     battery_discharge_enabled: bool = Field(alias="batteryDischargeEnabled")
     g100_lockout_state: str | None = Field(alias="g100LockoutState")
+
+    @validator(*[f"ct_{n + 1}_type" for n in range(6)], pre=True)
+    @classmethod
+    def validate_ct_type(cls, value: Any):
+        return None if value == "None" else value
 
     @validator("current_date", pre=True)
     @classmethod

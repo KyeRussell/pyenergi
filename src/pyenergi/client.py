@@ -275,7 +275,7 @@ class Zappi(Entity):
     phases: Literal[1, 3]
     """The number of electrical phases."""
 
-    cts: list[CT]
+    cts: dict[int, CT]
     """Information pertaining to each of the Zappi's current transformers."""
 
     diversion_amount: int
@@ -369,15 +369,13 @@ class Zappi(Entity):
         return zappi
 
     @staticmethod
-    def _get_cts(response: schemas.ZappiStatus) -> list[CT]:
-        cts = []
+    def _get_cts(response: schemas.ZappiStatus) -> dict[int, CT]:
+        cts = {}
         for i in range(1, 7):
-            cts.append(
-                CT(
-                    type=getattr(response, f"ct_{i}_type"),
-                    power=getattr(response, f"ct_{i}_power"),
-                )
-            )
+            ct_type = getattr(response, f"ct_{i}_type", None)
+            ct_power = getattr(response, f"ct_{i}_power", None)
+            if not (ct_type is None or ct_power is None):
+                cts[i] = CT(type=ct_type, power=ct_power)
         return cts
 
     @staticmethod
