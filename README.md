@@ -12,11 +12,13 @@
 
 ---
 
-This project is not remotely ready for anyone to look at, let alone use. It is in a very early proof-of-concept stage, focusing on iterative research and development. I have not settled on the project's architecture, and I am still exploring the problem space. As such, the quality of the code is very poor, and things are guaranteed to change.
-
-I will not provide support, nor am I accepting PRs at this time.
+This project is not remotely ready for anyone to look at, let alone use. I will not provide support, nor am I accepting PRs at this time.
 
 ---
+
+## Coverage
+
+- Zappi
 
 ## Developing
 

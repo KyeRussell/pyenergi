@@ -9,7 +9,7 @@ description = "Python client for the myenergi API"
 readme = "README.md"
 license = { file = "LICENSE" }
 requires-python = ">=3.11"
-dependencies = ["typer", "rich", "httpx"]
+dependencies = ["typer", "rich", "httpx", "pydantic<2"]
 classifiers = [
     "Development Status :: 1 - Planning",
     "License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)",
@@ -20,8 +20,23 @@ keywords = ["myenergi", "home automation", "iot", "internet of things"]
 dynamic = ["version"]
 
 [project.optional-dependencies]
-dev = ["ruff", "pre-commit", "mypy", "build", "hatch", "pytest", "pytest-cov"]
-docs = ["sphinx", "shibuya", "myst-parser"]
+dev = [
+    "ruff",
+    "pre-commit",
+    "mypy",
+    "build",
+    "hatch",
+    "pytest",
+    "pytest-cov",
+    "pytest-asyncio",
+]
+docs = [
+    "sphinx",
+    "furo",
+    "myst-parser",
+    "sphinx-autobuild",
+    "sphinx-autodoc-typehints",
+]
 
 [project.urls]
 Homepage = "https://pyenergi.readthedocs.io"
@@ -43,3 +58,28 @@ exclude = ["*.json", "pkg/_compat.py"]
 [tool.pytest.ini_options]
 minversion = "8.1.1"
 addopts = "--cov=src --cov-report html"
+markers = ["online: marks tests as communicating with the myenergi API"]
+
+[tool.ruff]
+target-version = "py311"
+
+[tool.ruff.lint]
+select = [
+    "UP",    # pyupgrade
+    "I",     # isort
+    "W",     # Warning
+    "N",     # pep8-naming
+    "YTT",   # flake8-2020
+    "ASYNC", # flake8-async
+    "B",     # flake8-bugbear
+    "A",     # flake8-builtins
+    "C4",    # flake8-comprehensions
+    "DTZ",   # flake8-datetimez
+    "ICN",   # flake8-import-conventions
+    "G",     # flake8-logging-format
+    "PIE",   # flake8-pie
+    "Q",     # flake8-quotes
+    "RSE",   # flake8-raise
+    "SIM",   # flake8-simplify
+    "PTH",   # flake8-use-pathlib
+]

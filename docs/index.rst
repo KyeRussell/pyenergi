@@ -1,17 +1,47 @@
-.. include:: ../README.md
-   :parser: myst_parser.sphinx_
+========
+pyenergi
+========
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Contents:
-
-   CHANGELOG
-   CONTRIBUTING
+pyenergi is an unofficial Python API client for the myenergi API.
 
 
-Indices and tables
-==================
+Getting started
+===============
 
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+
+API reference
+=============
+
+.. autoclass:: pyenergi.Hub
+   :members:
+
+
+Zappi
+-----
+
+.. autoclass:: pyenergi.Zappi
+    :members:
+
+
+.. autoclass:: pyenergi.CT
+    :members:
+
+
+Enums
+`````
+
+.. autoclass:: pyenergi.ChargeMode
+    :members:
+
+.. autoclass:: pyenergi.ChargeStatus
+    :members:
+
+.. autoclass:: pyenergi.LastCommandStatus
+    :members:
+
+
+Exceptions
+----------
+
+.. automodule:: pyenergi.exceptions
+    :members:
